@@ -350,9 +350,9 @@ formUI.addEventListener('submit', (e)=> {
             searchable = envChange.canbesearched;
             keyUsable = envChange.canUseKey;
             isExplorable = envChange.canExplore;
-        }else if (playerTxt == 'explore' && canExpl == false && canStart == false) {
+        }else if (playerTxt.toLowerCase() == 'explore' && canExpl == false && canStart == false) {
             infotxt = `i cannot go further with this zombie attacking me`
-        }else if (playerTxt == 'explore' && canExpl == true && canStart == true) {
+        }else if (playerTxt.toLowerCase() == 'explore' && canExpl == true && canStart == true) {
             let entChange = envArr[6];
             infotxt = entChange.msg;
             attackable = entChange.canAttack
@@ -516,7 +516,7 @@ formUI.addEventListener('submit', (e)=> {
             infotxt = ` game over`;
             attackable = false;
         } else if (eRoll20 <= pm1.defence && pm1.health >= 1) {
-            infotxt = ` enemy attack missed`;
+            infotxt += ` enemy attack missed`;
             ediReset();
         }
     }
@@ -545,11 +545,11 @@ formUI.addEventListener('submit', (e)=> {
                     pdiReset();
                     attackable = false;
                     isExplorable = true;
-                    infotxt =` now that the enemie is dead i may be able to go forward`
+                    infotxt +=` now that the enemie is dead i may be able to go forward`
                 } else if (roll10 === 0 && roll20 === 0) {
                     infotxt = ' please roll your dice';
                 } else if  (roll20 <= enemie.defence && enemie.health >= 1) {
-                    infotxt = ` attack missed`; 
+                    infotxt += ` attack missed`; 
                     pdiReset()
                     if (enemie.health >= 1) {
                         playerDamage();
