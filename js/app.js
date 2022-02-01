@@ -71,7 +71,7 @@ let bossRoom = new environ(``, ``, ` bossRoom`, false, 0, true, false, false);
 // messages that will apear when exploring
 
 let beginningMsg = `Our story begins with you, oh chosen one of the darkness. This is no mear, tail not some quaint legend. No this is the Legend of the Dark Contact. Hundreds of years ago, after the final fires of Rome flickered out and the world was gearing up for a new age of darkness. You a small farmer would wander into the forest surrounding your small homestead. But for you my lord this would be no normal outing. Trudging trough the darkest part of that cursed wood you found a castle. One that had not been there before. The once great stonework glinted with a dark misty halo at once you felt that cursed keep beckoning you deeper. to venture deeper type explore in the text box`;
-let entranceMsg = `Finding the doors of that old palace open you ventured inside to find a once great hall now reduced to a shadow of its glory. The great red tapestry still on display but tattered with time and washed pale in the sun light. And yet you feel something dark beckoning to you from deep within the castle you will need to search for items as you dig around this castle to search for a chest type search in the text box.`;
+let entranceMsg = `Finding the doors of that old palace open you ventured inside to find a once great hall now reduced to a shadow of its glory. The great red tapestry still on display but tattered with time and washed pale in the sun light. And yet you feel something dark beckoning to you from deep within the castle. infront of you is a heap of moving rotten flesh ready to attack (you will have to kill it before you can move on). (you will also need to search for items as you dig around this castle to search for a chest type search in the text box.)`;
 let bossDoorMsg = `Yes here it is, what ever it is calling me is behind that door but it is locked. I need to find a key to open the door.`;
 let endgameText = `As the undead king falls at your feet the crown on his head beacons to you. You place it on your head. In an instant you can see hundreds of years of history flash before your eyes. The knowledge of those who themselves have put the crown on their heads wells from within you rotting out your mind as hundreds of voices enter your head. All your darkest desires are lade to bare in front of you the door that had once disappeared is brought up once more and in an instant the castle that you have explored disappears in front of you and drags you into the crown. Until you reappear once more yourself king of the undead.`;
 
@@ -81,11 +81,11 @@ bossDoor.msg = bossDoorMsg;
 
 
 //hallway msg with enemies
-let hw1 = `A long hallway sits before you and inside it a silhouette of a mobile rotting corpse the stench of years fills the air and the must of decay dances in your airways. Its hard to breath here part of you wants to run, but something is calling for you to go deeper within the annals of this forsaken keep.`;
-let hw2 = `Halls the veins of a buildings in this case what used to be the veins of buildings. The cracking stonework and destroyed portraits of an era long gone and lost to time. yet you forward into one hall after the next not knowing what you are looking for but knowing that you are looking for something. In the distance is another walking corpse. Can you survive this place?`;
+let hw1 = `A long hallway sits before you and inside it, a silhouette of a mobile rotting corpse the stench of years fills the air, and the must of decay dances in your airways. It's hard to breathe here part of you wants to run, but something is calling for you to go deeper within the annals of this forsaken keep.`;
+let hw2 = `Halls are the veins of buildings in this case what used to be the veins of buildings. The cracking stonework and destroyed portraits of an era long gone and lost to time. yet you forward into one hall after the next not knowing what you are looking for but knowing that you are looking for something. In the distance is another walking corpse. Can you survive this place?`;
 let hw3 = `The hallway before you is like the ones before. But this one has a window overlooking a courtyard. Staring outside of it for just one second you no longer feel the pull from deep within the Keep. However as fast as it went it came back the figure before you what could be causing them to come forth out of eternal slumber.`;
 // hallway msg without enemies
-let hw4 = `Another hallway hasn/'t that been what you have seen the most of. This hall has no aroma to it could that mean no zombie as well you look around nothing has shambled or tried to attack you. You walk slower through this hall taking in the ripped portraits, and for a moment you see this hall in all its former grandeur people walking about joyously. A festivity of some kind? Then quick as the vision came it was gone. You feel the calling to the deep grow only stronger as you wonder what this place was.`;
+let hw4 = `Another hallway hasn't that been what you have seen the most of. This hall has no aroma to it could that mean no zombie as well you look around nothing has shambled or tried to attack you. You walk slower through this hall taking in the ripped portraits, and for a moment you see this hall in all its former grandeur people walking about joyously. A festivity of some kind? Then quick as the vision came it was gone. You feel the calling to the deep grow only stronger as you wonder what this place was.`;
 let hw5 = `A hall, this one stripped bare nothing and no one to occupy it a broken table cracked in half sits against the side wall. Letters or runes carved deep into it surface in a language lost to you. Knowing not what is says you go deeper into the hall. The further you go the barer it gets until the stonework only remains. Cuts deep into the stone not by masons but by soldiers the clatter of swords and the flash of steel fill your eyes and ears. That feeling what could it be.`;
 let hw6 = `This hall looks to be that of the servants' quarters beds fill rooms on either side of the hall nothing much to see in this hall. Empty as it was the day it was built. Hold on how do you know that how do you remember that. A rush of visions and a multitude of voices all crying at once saying nothing speaking over one another in a rumbling voice with no direction. The darkness inside the building grows and a sinister feeling fills your heart what happened here.`;
 
@@ -201,7 +201,7 @@ rolld10.addEventListener('click', ()=> {
     let die10 = pd10.sides;
     //console.log(dienumb)
     roll10 = Math.floor(Math.random() * die10) + 1;
-    pD10otp.innerText = `d10, ${roll10}`;
+    pD10otp.innerText = `d10: ${roll10}`;
     
 });
 
@@ -212,7 +212,7 @@ rolld20.addEventListener('click', ()=> {
     let die20 = pd20.sides;
     //console.log(dienumb)
     roll20 = Math.floor(Math.random() * die20) + 1;
-    pD20otp.innerText = `d20, ${roll20}`;
+    pD20otp.innerText = `d20: ${roll20}`;
     
 });
 
@@ -396,6 +396,7 @@ formUI.addEventListener('submit', (e)=> {
                 infotxt =`you found a chest containing: `;
                 giveChestItem();
                 searchable = false;
+                pdiReset();
         
             }else if (roll10 === 0, roll20 === 0) {
                 infotxt = `please roll your dice`
@@ -404,6 +405,7 @@ formUI.addEventListener('submit', (e)=> {
                 chestPresent = false;
                 infotxt =`you found nothing please proceade to the next aria`;
                 searchable = false;
+                pdiReset()
             }
 
 
@@ -544,7 +546,7 @@ formUI.addEventListener('submit', (e)=> {
                     attackable = false;
                     isExplorable = true;
                     infotxt =` now that the enemie is dead i may be able to go forward`
-                }  else if (roll10 === 0 && roll20 === 0) {
+                } else if (roll10 === 0 && roll20 === 0) {
                     infotxt = ' please roll your dice';
                 } else if  (roll20 <= enemie.defence && enemie.health >= 1) {
                     infotxt = ` attack missed`; 
